@@ -3,10 +3,17 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Product
 from django.contrib import messages
 from .forms import SignUpForm
+import requests
+import json
 
 def home(request):
     products = Product.objects.all()
-    return render(request, 'home.html', {'products': products})
+    ticker = 'ELF'
+    api_request = requests.get("https://api.marketstack.com/v1/eod?access_key=6fdf201f00373afd80eb7d2c2efea784&date_from=2024-08-01&date_to=2024-08-03&symbols=" + ticker)
+    api = json.loads(api_request.content)
+    stock_data = api['data']
+
+    return render(request, 'home.html', {'products': products, 'stock_data': stock_data})
 
 def login_user(request):
     if request.method == "POST":

@@ -27,16 +27,24 @@
             
             <div class="col-2">
                 <h6>ELF, Beauty co.</h6>
-                
+                {% for value in stock_data %}
+                    <h6>Date: {{ value.date }}</h6>
+                    <p>Open: {{ value.open }}</p>
+                    <p>High: {{ value.high }}</p>
+                    <p>Low: {{ value.low }}</p>
+                    <p>Close: {{ value.close }}</p>
+                    <br />
+                {% endfor %}
             </div>
 
             <div class="col-8 text-center">
-                
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
             </div>
 
             <div class="col-2 text-center">
                 {% for product in products %}
                 <div class="card h-100">
+                    {% if user.is_authenticated %}
                     <div class="card-body p-4">
                         <div class="py-2">
                             <h5 class="fw-bolder">Available Stock</h5>
@@ -59,6 +67,14 @@
                             </button>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="py-3">
+                        <p>Please, </p>
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        <p class="pt-2">or </p>
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </div>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>

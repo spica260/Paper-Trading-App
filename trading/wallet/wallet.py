@@ -44,9 +44,25 @@ class Wallet():
         thing = self.wallet
         return thing
     
-    def delete(sefl, product):
+    def delete(self, product):
         product_id = str(product)
-        if product_id in sefl.wallet:
-            del sefl.wallet[product_id]
+        if product_id in self.wallet:
+            del self.wallet[product_id]
 
-        sefl.session.modified = True
+        self.session.modified = True
+
+    def wallet_total(self):
+            product_ids = self.wallet.keys()
+            products = Product.objects.filter(id__in=product_ids)
+            quantities = self.wallet
+            total = 0
+            for key, value in quantities.items():
+                key = int(key)
+                for product in products:
+                    if product.id == key:
+                        total = total + (product.price * value)
+                        if total > int(500):
+                            return 'Insufficient credit'
+                        else:
+                            pass
+            return total

@@ -65,4 +65,29 @@
         </div>
     </div> 
 
+<script>
+  $(document).on('click', '#add-wallet', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url "wallet_add" %}',
+        data: {
+          product_id: $('#add-wallet').val(),
+          product_qty: $('#qty-wallet option:selected').text(),
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          action: 'post'
+        },
+
+        success: function(json){
+            document.getElementById("wallet_quantity").textContent = json.qty
+            window.location.href = "{% url 'wallet_summary' %}"; 
+        },
+
+        error: function(xhr, errmsg, err){
+
+        }
+    });
+})
+</script>
+
 {% endblock %}

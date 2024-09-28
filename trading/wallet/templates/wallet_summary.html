@@ -14,8 +14,8 @@
 <section class="container py-5 d-flex">
   <div class="row card p-3 mx-auto">
     <div class="col-md-10 mx-auto">
-    {% if cart_products %}
-      {% for product in cart_products %}
+    {% if wallet_products %}
+      {% for product in wallet_products %}
         <h5>Stock Price: ${{ product.price }}</h5>
 
         <div class="row my-3">
@@ -39,19 +39,27 @@
 
         <div class="row my-3">
           <div class="col-md-12 text-end">
-            <button type="button" data-index="{{product.id}}" class="btn btn-outline-dark update-cart">Update</button>
+            <button type="button" data-index="{{product.id}}" class="btn btn-outline-dark update-wallet">Update</button>
           </div>
       </div>
       {% endfor %}
-
-      <div class="row my-3">
-        
-      </div>
       
+      <div class="row my-3">
+        {% if totals == "Insufficient credit" %}
+          <p class="alert alert-danger"><strong> {{ totals }}</strong></p>
+        {% else %}
+          <p class="alert alert-warning">Total:<strong> ${{ totals }}</strong></p>
+        {% endif %}
+
+        {% for customer in customer %}
+        <p>Credit Available:<strong> ${{ customer.credit }}</strong></p>
+        {% endfor %}
+      </div>
+      {% for product in wallet_products %}
       <div class="col-md-12 text-end">
         <button type="button" data-index="{{product.id}}" class="btn btn-danger delete-product">Remove</button>
       </div>
-      
+      {% endfor %}
     </div>
   </div>
   {% else %}
@@ -62,5 +70,51 @@
     <br /><br />
     </div>
 </section>
+
+<script>
+// update wallet
+$(document).on('click', '.update-wallet', function(e){
+  e.preventDefault();
+  var productid = $(this).data('index');
+  $.ajax({
+    type: 'POST',
+    url: '{% url "wallet_update" %}',
+    data: {
+      product_id: $(this).data('index'),
+      product_qty: $('#select' + productid + ' option:selected').text(),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
+    success: function(json){
+    location.reload();
+    },
+                
+    error: function(xhr, errmsg, err){
+                
+    }
+  });
+})
+
+// delete wallet
+$(document).on('click', '.delete-product', function(e){
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '{% url "wallet_delete" %}',
+    data: {
+      product_id: $(this).data('index'),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
+    success: function(json){
+    location.reload();
+    },
+                
+    error: function(xhr, errmsg, err){
+                
+    }
+  });
+})
+</script>
 
 {% endblock %}

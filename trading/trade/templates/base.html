@@ -47,10 +47,10 @@
                         <li class="nav-item d-flex mx-3">Welcome Guest!</li>
                     {% endif %}
                     <form class="d-flex">
-                        <a href="" class="btn btn-outline-dark">
+                        <a href="{% url 'wallet_summary' %}" class="btn btn-outline-dark">
                             <i class="bi bi-wallet"></i>
                             My Wallet
-                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="wallet_quantity">
                                 0
                             </span>
                         </a>

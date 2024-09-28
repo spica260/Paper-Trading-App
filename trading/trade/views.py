@@ -1,15 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from .models import Product
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 
 def home(request):
-    return render(request, 'home.html')
-
-def product(request, pk):
-    pass
+    products = Product.objects.all()
+    return render(request, 'home.html', {'products': products})
 
 def login_user(request):
     if request.method == "POST":

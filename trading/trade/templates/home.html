@@ -35,7 +35,32 @@
             </div>
 
             <div class="col-2 text-center">
-                
+                {% for product in products %}
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <div class="py-2">
+                            <h5 class="fw-bolder">Available Stock</h5>
+                            <strong>${{ product.price }}</strong>
+                        </div>
+                            <div class="pt-2">
+                              <p>Quantity: </p>
+                            </div>
+                            <div class="col-6 pb-2 mx-auto">
+                              <select class="form-select" id="qty-wallet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                              </select>
+                            </div>
+                        <div class="py-2">
+                            <button type="button" value="{{ product.id }}" id="add-wallet" class="btn btn-dark mt-auto">
+                                Buy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div> 

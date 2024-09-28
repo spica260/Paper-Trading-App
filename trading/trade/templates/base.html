@@ -30,7 +30,7 @@
                             <li class="nav-item">
                                 <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}
-                                    <button class="nav-link" type="submit">Logout</button>
+                                    <button class="nav-link" type="submit" style="border: none; background: #f8f9fa; color: rgba(0, 0, 0, 0.9)">Logout</button>
                                 </form>
                             </li>
                         {% else %}

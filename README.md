@@ -1,4 +1,4 @@
-# Paper Trading App | Project 04
+# Paper Trading App
 
 Paper trading app.
 

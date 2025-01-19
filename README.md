@@ -37,10 +37,6 @@ API Key:
 6fdf201f00373afd80eb7d2c2efea784
 ```
 
-## Github Pages
-
-[Paper-Trading-App](https://spica260.github.io/Paper-Trading-App/)
-
 
 ## Project by
 

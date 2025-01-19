@@ -1,14 +1,12 @@
 # Paper Trading App
 
-Paper trading app.
-
-## Description
-
 Paper trading app to see and buy stocks from ELF Beauty, co.
+
 
 ## ELF Beauty, co. Ticker
 
 ELF
+
 
 ## Technologies used
 
@@ -21,6 +19,7 @@ Build with Django
 • CSS
 
 • Javascript
+
 
 ## API Used
 
